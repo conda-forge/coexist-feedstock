@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/coexist-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/coexist-{{ version }}.tar.gz
   sha256: c82d659de5d9a2ebeea7490166f44dd1d3e5788dcd831c0940a04b9eb124dd36
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools
     - wheel
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - numpy >=1.17.3
     - scipy >=1.4.1
     - pandas >=1.0.5
@@ -40,6 +40,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/uob-positron-imaging-centre/Coexist
